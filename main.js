@@ -4,7 +4,7 @@ var app = require('http').createServer(handler),
 	_ = require('underscore'),
 	games = [],
 	users = [],
-	minUsersPerGame = 2;
+	minUsersPerGame = 1;
 
 var jsonify = function(obj) {
 	return JSON.stringify(obj, null, 4);
