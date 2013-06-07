@@ -33,6 +33,15 @@ body {
 	min-height: 600px;
 }
 
+.players ul {
+	list-style: none;
+	margin-left: 6px;
+}
+
+.players ul li i {
+	margin-right: 6px;
+}
+
 #JoinDiv {
 	margin-top: 200px;
 }

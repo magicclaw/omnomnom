@@ -46,9 +46,9 @@
 				<div class="header">
 					<h4>Players</h4>
 				</div>
-				<ol class="users">
-					<li ng-repeat="player in players" id="player-{{player.socketId}}">{{player.name}}</li>
-				</ol>
+				<ul class="users">
+					<li ng-repeat="player in players" id="player-{{player.socketId}}"><i class="icon-user"></i>{{player.name}}</li>
+				</ul>
 			</div>
 			<div class="span6 container-fluid">
 				<div class="row-fluid">
