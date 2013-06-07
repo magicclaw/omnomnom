@@ -20,6 +20,7 @@ function GameController($scope) {
 		$scope.players = data.players;
 		$scope.slots = [];
 		$scope.highscores = data.highscores;
+		slotPieceKeyList = [];
 		for(var i = 0; i < data.puzzle.prompt.length;i++) {
 			var prompt = data.puzzle.prompt[i];
 
