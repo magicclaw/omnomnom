@@ -27,27 +27,32 @@ var readPuzzles = function() {
 };
 var puzzles = readPuzzles();
 
-var readHighscores = function() {
-	try {
-		var data = fs.readFileSync(__dirname + '/highscores.json');
-		var parsedData = JSON.parse(data);
-		console.log('High Scores loaded. ' + jsonify(parsedData));
-		return parsedData;
-	} catch (err) {
-		console.log('Couldn\'t read high scores from highscores.json. Error: ' + jsonify(err));
-		return;
-	}
-};
-var highscores = readHighscores();
-
 var saveHighscores = function() {
 	try {
-		fs.writeFileSync(__dirname + '/highscores.json', highscores);
+		fs.writeFileSync(__dirname + '/highscores.json', JSON.stringify(highscores));
 	} catch (err) {
 		console.log('Couldn\'t save high scores to highscores.json. Error: ' + jsonify(err));
 		return;
 	}
 };
+
+var readHighscores = function() {
+	try {
+		if (!fs.existsSync(__dirname + '/highscores.json')) {
+			highscores = [];
+			saveHighscores();
+		} else {
+			var data = fs.readFileSync(__dirname + '/highscores.json');
+			var parsedData = JSON.parse(data);
+			console.log('High Scores loaded. ' + jsonify(parsedData));
+			highscores = parsedData;
+		}
+	} catch (err) {
+		console.log('Couldn\'t read high scores from highscores.json. Error: ' + jsonify(err));
+		return;
+	}
+};
+readHighscores();
 
 var updateHighscore = function(user, pointAdder) {
 	var highscore = _.find(highscores, function(hs) {
@@ -201,14 +206,18 @@ var dropPiece = function(user, game) {
 var isPuzzleSolved = function(game) {
 	var success = true;
 	_.each(game.puzzle.pieces, function(piece) {
-		if (piece.placedAt < 0 || game.puzzle.solution[piece.placedAt] != piece.value) {
+		if (!isPieceCorrect(piece, game)) {
 			success = false;
 		}
 	});
 	return success;
 };
 
-var placePieceAt = function(piece, slotPiece, slotIdx, game) {
+var isPieceCorrect = function(piece, game) {
+	return (piece.placedAt >= 0 && game.puzzle.solution[piece.placedAt] == piece.value);
+};
+
+var placePieceAt = function(piece, slotPiece, slotIdx, game, user) {
 	var previousSlotIdx = piece.placedAt;
 	piece.placedAt = slotIdx;
 	delete piece.heldBy; //let go of the piece
@@ -219,17 +228,24 @@ var placePieceAt = function(piece, slotPiece, slotIdx, game) {
 		slotPiece.placedAt = previousSlotIdx;
 		console.log('emit-all: piecePlaced | ' + jsonify({piece: slotPiece}));
 		io.sockets.emit('piecePlaced', {piece: slotPiece});
+		if (isPieceCorrect(slotPiece, game)) {
+			updateHighscore(user, 1);
+		}
 	} else {
 		if (previousSlotIdx != -1) {
 			console.log('emit-all: slotCleared | ' + jsonify({slotIdx: previousSlotIdx}));
 			io.sockets.emit('slotCleared', {slotIdx: previousSlotIdx});
 		}
 	}
+	if (isPieceCorrect(piece, game)) {
+		updateHighscore(user, 1);
+	};
 	console.log('emit-all: piecePlaced | ' + jsonify({piece: piece}));
 	io.sockets.emit('piecePlaced', {piece: piece});
 	
 	//Check for puzzle completion
 	if (isPuzzleSolved(game)) {
+		updateHighscore(user, 2);
 		console.log('emit-all: puzzleSolved | ' + jsonify({game: game}));
 		io.sockets.emit('puzzleSolved', game);
 		//delete game from array
@@ -441,7 +457,7 @@ var handlePlacePiece = function(socket, data, callback) {
 		return;
 	}
 	
-	placePieceAt(piece, slotPiece, data.slotIdx, game);
+	placePieceAt(piece, slotPiece, data.slotIdx, game, user);
 	
 	if (!!callback) {
 		callback(true);
