@@ -60,7 +60,9 @@
 				<div class="row-fluid">
 					<div class="puzzleBox span12 content">
 						<h4>Puzzle</h4>
-						<span ng-repeat="slot in slots" class="{{slot.cssClass}}" id="slot-{{slot.id}}" ng-Dblclick="slotDoubleClick(slot.id)" ng-click="slotClick(slot.id)" ondragover="allowDroppable({{slot.id}}, 'slot-{{slot.id}}')" ondrop="onPieceDropped(event, {{slot.id}})"> {{slot.value}}</span>.
+						<p>
+						<span ng-repeat="slot in slots" class="{{slot.cssClass}}" id="slot-{{slot.id}}" ng-Dblclick="slotDoubleClick(slot.id)" ng-click="slotClick(slot.id)" ondragover="allowDroppable({{slot.id}}, 'slot-{{slot.id}}')" ondrop="onPieceDropped(event, {{slot.id}})">&nbsp;{{slot.value}}</span>.
+						</p>
 					</div>
 				</div>
 			</div>

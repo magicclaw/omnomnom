@@ -52,14 +52,12 @@ body {
 }
 
 .slot {
-	height: 25px;
+	line-height: 25px;
 	width: 100px;
 	display:inline-block;
 	/*float:left;*/
 	margin-left:12px;
 	border: 1px solid black;
-	position: relative;
-	bottom: -0.5em;
 }
 
 .notSlot {
