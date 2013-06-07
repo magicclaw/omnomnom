@@ -51,13 +51,13 @@
 				<div class="row-fluid">
 					<div class="bucket actionableItem span12 content" ng-Dblclick="bucketDoubleClick()">
 						<h4>Bucket List</h4>
-						<div ng-repeat="piece in pieces" id="piece-{{piece.id}}" ng-click="pieceClick(piece.id)" class="actionableItem pieceClass">{{piece.value}}</div>
+						<div ng-repeat="piece in pieces" id="piece-{{piece.id}}" ng-click="pieceClick(piece.id)" class="actionableItem pieceClass" draggable="true" ondragstart="onPieceDragStart({{piece.id}})" ondragend="onPieceDrop({{piece.id}})">{{piece.value}}</div>
 					</div>
 				</div>
 				<div class="row-fluid">
 					<div class="puzzleBox span12 content">
 						<h4>Puzzle</h4>
-						<span ng-repeat="slot in slots" class="{{slot.cssClass}}" id="slot-{{slot.id}}" ng-Dblclick="slotDoubleClick(slot.id)" ng-click="slotClick(slot.id)">{{slot.value}}</span>
+						<span ng-repeat="slot in slots" class="{{slot.cssClass}}" id="slot-{{slot.id}}" ng-Dblclick="slotDoubleClick(slot.id)" ng-click="slotClick(slot.id)" ondragover="allowDroppable({{slot.id}}, 'slot-{{slot.id}}')" ondrop="onPieceDropped(event, {{slot.id}})">{{slot.value}}</span>
 					</div>
 				</div>
 			</div>
