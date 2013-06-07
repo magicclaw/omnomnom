@@ -188,6 +188,8 @@ var placePieceAt = function(piece, slotPiece, slotIdx, game) {
 	if (isPuzzleSolved(game)) {
 		console.log('emit-all: puzzleSolved | ' + jsonify({game: game}));
 		io.sockets.emit('puzzleSolved', game);
+		//delete game from array
+		games = []; //total cheat, but whatever, we aren't going to get simultaneous games working on this hackathon anyway
 		setTimeout(function() {
 			var game = createGame();
 			_.each(users, function(user) {
