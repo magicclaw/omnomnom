@@ -5,7 +5,7 @@ body {
 }
 
 .hidden {
-	display:none;
+	display:none !important; 
 }
 
 .main {
@@ -57,9 +57,10 @@ body {
 	display:inline-block;
 	/*float:left;*/
 	margin-left:12px;
-	border: 1px solid black;
+	border: 1px solid #BBB;
 	margin-bottom: 10px;
 	padding-left: 4px;
+	border-radius: 3px;
 }
 
 .notSlot {
@@ -72,10 +73,9 @@ body {
 }
 
 .pieceClass {
-	border: 1px solid black;
-	width:100px;
-
+	border: 1px solid #BBB;
 	text-align:center;
+	border-radius: 3px;
 }
 
 
@@ -93,4 +93,16 @@ body {
 
 .untouchable {
 	color: #777777;
+}
+
+ul.words {
+	list-style: none;
+	margin: 0;
+}
+
+.words li {
+	padding: 4px;
+	display: inline-block;
+	margin-left: 10px;
+	margin-bottom: 10px;
 }
