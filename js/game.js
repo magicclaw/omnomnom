@@ -248,19 +248,26 @@ function GameController($scope) {
 	
 	$scope.slotClick = function(id) {
 		var slotNode = $("#slot-" + id);
-		if(!slotNode.hasClass("selectedPiece")) {
-			socket.emit("grabPiece", {pieceId:slotPieceKeyList[id]}, function(allowable) {
+		if((slotPieceKeyList[id] === undefined || slotPieceKeyList[id] === null)  && selectedPieceId !== null) {
+			socket.emit("placePiece", {slotIdx:id, pieceId:selectedPieceId}, function(success){
 			});
 		}
-		else {
+		else if(slotNode.hasClass("selectedPiece") && selectedPieceId === slotPieceKeyList[id]) {
 			socket.emit("dropPiece", {pieceId:id});
 			slotNode.removeClass("selectedPiece");
 			selectedPieceId = null;
 		}
+		else if(!slotNode.hasClass("selectedPiece")) {
+
+			socket.emit("grabPiece", {pieceId:slotPieceKeyList[id]}, function(allowable) {
+			});
+			// socket.emit("grabPiece", {pieceId:slotPieceKeyList[id]}, function(allowable) {
+			// });
+		}
 	};
 	
-	$scope.bucketDoubleClick = function(id) {
-		if(selectedPieceId !== null) {
+	$scope.bucketClick = function(id) {
+		if(selectedPieceId !== null && $scope.isSelectedPieceInSlot()) {
 			socket.emit("placePiece", {slotIdx:-1, pieceId:selectedPieceId}, function(success) {
 			});
 		}
