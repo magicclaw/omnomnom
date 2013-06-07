@@ -142,6 +142,9 @@ var createGame = function() {
 	
 	_.each(game.puzzle.pieces, function(piece) {
 		piece.placedAt = -1;
+		if (!!piece.heldBy) {
+			delete piece.heldBy;
+		}
 	});
 	
 	//Notify users of a new game being created
