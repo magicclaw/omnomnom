@@ -74,7 +74,7 @@ function GameController($scope) {
 	
 	var removePieceFromSlot = function(slotIdx) {
 		var slotNode = $("#slot-" + slotIdx);
-		slotNode.html("");
+		slotNode.html("&nbsp;");
 		slotNode.removeClass("selectedPiece");
 		slotPieceKeyList[slotIdx] = null;
 	};
@@ -180,14 +180,36 @@ function GameController($scope) {
 		refreshGame(data);
 	});
 
-	$scope.getSelectedPiece = function() {
+	$scope.getPieceIdFromSlotId = function(id) {
+
+		return slotPieceKeyList[id];
+	};
+
+	$scope.isSelectedPieceInSlot = function() {
+		for(key in slotPieceKeyList) {
+			if(slotPieceKeyList[key] === selectedPieceId) {
+				return true;
+			}
+		}
+		return false;
+	};
+
+	$scope.getSelectedPieceId = function() {
+
 		return selectedPieceId;
-	}
+	};
 
 	$scope.unselectDraggedPiece = function(id) {
 		var pieceNode = $("#piece-" + id);
 		socket.emit("dropPiece", {pieceId:id});
 		pieceNode.removeClass("selectedPiece");
+		selectedPieceId = null;
+	};
+
+	$scope.unselectDraggedSlot = function(id) {
+		var slotNode = $("#slot-" + id);
+		socket.emit("dropPiece", {pieceId:id});
+		slotNode.removeClass("selectedPiece");
 		selectedPieceId = null;
 	};
 	

@@ -61,7 +61,7 @@
 					<div class="puzzleBox span12 content">
 						<h4>Puzzle</h4>
 						<p>
-						<span ng-repeat="slot in slots" class="{{slot.cssClass}}" id="slot-{{slot.id}}" ng-Dblclick="slotDoubleClick(slot.id)" ng-click="slotClick(slot.id)" ondragover="allowDroppable({{slot.id}}, 'slot-{{slot.id}}')" ondrop="onPieceDropped(event, {{slot.id}})">&nbsp;{{slot.value}}</span>.
+						<span ng-repeat="slot in slots" class="{{slot.cssClass}}" id="slot-{{slot.id}}" ng-Dblclick="slotDoubleClick(slot.id)" ng-click="slotClick(slot.id)" draggable="true" ondragstart="onSlotDragStart({{slot.id}})" ondragend="onSlotDrop({{slot.id}})" ondragover="allowDroppable({{slot.id}}, 'slot-{{slot.id}}')" ondrop="onPieceDropped(event, {{slot.id}})">&nbsp;{{slot.value}}</span>.
 						</p>
 					</div>
 				</div>

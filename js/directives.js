@@ -4,9 +4,26 @@
 
 var Game = angular.module('Game', []);
 
+function onSlotDragStart(id) {
+
+	var scope = angular.element($("#GameDiv")).scope();
+	var textObj = { "id" : scope.getPieceIdFromSlotId(id), "node": true}
+	event.dataTransfer.setData("Text", JSON.stringify(textObj));
+	socket.emit("grabPiece", {pieceId:scope.getPieceIdFromSlotId(id)}, function(allowable) {});
+
+	
+}
+
+function onSlotDrop(id) {
+	var scope = angular.element($("#GameDiv")).scope();
+	scope.unselectDraggedSlot(id);
+
+}
+
 //Draggable events
 function onPieceDragStart(id) {
-	event.dataTransfer.setData("Text", id);
+	var textObj = { "id" : id}
+	event.dataTransfer.setData("Text", JSON.stringify(textObj));
 	socket.emit("grabPiece", {pieceId:id}, function(allowable) {});
 }
 
@@ -17,7 +34,9 @@ function onPieceDrop(id) {
 
 function onPieceDropped(e, id){
 	e.preventDefault();
-	var pieceId = parseInt(event.dataTransfer.getData("Text"));
+	var textObj = JSON.parse(event.dataTransfer.getData("Text"));
+	var pieceId = textObj.id;
+	//var pieceId = parseInt(event.dataTransfer.getData("Text"));
 	socket.emit("placePiece", {slotIdx:id, pieceId:pieceId}, function(success) {
 		if(success) {
 		}
@@ -25,10 +44,18 @@ function onPieceDropped(e, id){
 }
 
 function allowDroppable(id, nodeId) {
-
+	
 	if($("#"+nodeId).hasClass("slot")) {
 		
 		event.preventDefault();	
+
+	}
+
+	if(id === -1) {
+		var scope = angular.element($("#GameDiv")).scope();
+		if(scope.isSelectedPieceInSlot()) {
+			event.preventDefault();
+		}
 
 	}
 	
