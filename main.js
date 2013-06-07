@@ -263,7 +263,7 @@ var placePieceAt = function(piece, slotPiece, slotIdx, game, user) {
 			});
 			console.log('emit-all: gameStarted | ' + jsonify({game: sanitizeGame(game)}));
 			io.sockets.emit('gameStarted', sanitizeGame(game));
-		}, 1000);
+		}, 5000);
 	}
 };
 
