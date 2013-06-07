@@ -2,8 +2,6 @@
 <html>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	<link rel="stylesheet" href="/css/bootstrap.css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="/css/bootstrap-responsive.css" rel="stylesheet">
 	<link rel="stylesheet" href="/css/custom.css" />
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="http://code.angularjs.org/1.0.6/angular.min.js"></script>
@@ -43,15 +41,14 @@
 			</div>
 		</div>
 
-		<div id="GameDiv" class="hidden" ng-controller="GameController" class="row-fluid">
-			<div class="span3 content">
-				<div class="row-fluid">
-					<div class="users">
-						<h4>Players</h4>
-						<div ng-repeat="player in players" id="player-{{player.socketId}}">
-						{{player.name}}</div>
-					</div>
+		<div id="GameDiv" class="hidden row-fluid" ng-controller="GameController">
+			<div class="span3 content players">
+				<div class="header">
+					<h4>Players</h4>
 				</div>
+				<ol class="users">
+					<li ng-repeat="player in players" id="player-{{player.socketId}}">{{player.name}}</li>
+				</ol>
 			</div>
 			<div class="span6 container-fluid">
 				<div class="row-fluid">
@@ -67,14 +64,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="span3 content">
-				<div class="row-fluid">
-					<div class="users">
-						<h4>Leader Board</h4>
-						<div ng-repeat="highscore in highscores" id="highscore-{{highscore.user.socketId}}">
-						{{highscore.user.name}} - {{highscore.score}}</div>
-					</div>
+			<div class="span3 content leaderboard">
+				<div class="header">
+					<h4>Leader Board</h4>
 				</div>
+				<ol class="users">
+					<li ng-repeat="highscore in highscores" id="highscore-{{highscore.user.socketId}}">{{highscore.user.name}} - {{highscore.score}}</li>
+				</ol>
 			</div>
 		</div>
 
