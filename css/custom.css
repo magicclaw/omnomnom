@@ -19,6 +19,29 @@ body {
 	border: 1px solid #DDD;
 }
 
+.content .header {
+	border-bottom: 1px solid #e5e5e5;
+	margin-bottom: 14px;
+}
+
+.content .header h4 {
+	margin-top: 0;
+}
+
+
+.players, .leaderboard {
+	min-height: 600px;
+}
+
+.players ul {
+	list-style: none;
+	margin-left: 6px;
+}
+
+.players ul li i {
+	margin-right: 6px;
+}
+
 #JoinDiv {
 	margin-top: 200px;
 }
