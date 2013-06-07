@@ -52,7 +52,7 @@
 			</div>
 			<div class="span6 container-fluid">
 				<div class="row-fluid">
-					<div class="bucket actionableItem span12 content" ng-Dblclick="bucketDoubleClick()">
+					<div class="bucket actionableItem span12 content" ng-Dblclick="bucketDoubleClick()" ondragover="allowDroppable(-1, -1)" ondrop="onPieceDropped(event, -1)">
 						<h4>Bucket List</h4>
 						<div ng-repeat="piece in pieces" id="piece-{{piece.id}}" ng-click="pieceClick(piece.id)" class="actionableItem pieceClass" draggable="true" ondragstart="onPieceDragStart({{piece.id}})" ondragend="onPieceDrop({{piece.id}})">{{piece.value}}</div>
 					</div>
