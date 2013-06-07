@@ -45,7 +45,13 @@
 
 		<div id="GameDiv" class="hidden" ng-controller="GameController" class="row-fluid">
 			<div class="span3 content">
-				<h3>Stuff</h3>
+				<div class="row-fluid">
+					<div class="users">
+						<h4>Players</h4>
+						<div ng-repeat="player in players" id="player-{{player.socketId}}">
+						{{player.name}}</div>
+					</div>
+				</div>
 			</div>
 			<div class="span6 container-fluid">
 				<div class="row-fluid">
@@ -62,7 +68,13 @@
 				</div>
 			</div>
 			<div class="span3 content">
-				<h3>Other Stuff</h3>
+				<div class="row-fluid">
+					<div class="users">
+						<h4>Leader Board</h4>
+						<div ng-repeat="highscore in highscores" id="highscore-{{highscore.user.socketId}}">
+						{{highscore.user.name}} - {{highscore.score}}</div>
+					</div>
+				</div>
 			</div>
 		</div>
 

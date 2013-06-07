@@ -197,7 +197,16 @@ var placePieceAt = function(piece, slotPiece, slotIdx, game) {
 			io.sockets.emit('gameStarted', sanitizeGame(game));
 		}, 1000);
 	}
-}
+};
+
+var getUserIdx = function(user, userList) {
+	for (var i = 0; i < userList.length; i++) {
+		if (userList[i].socketId == user.socketId) {
+			return i;
+		}
+	}
+	return null;
+};
 
 var getStatus = function() {
 	return {
@@ -392,15 +401,6 @@ var handlePlacePiece = function(socket, data, callback) {
 		callback(true);
 	}
 };
-
-var getUserIdx = function(user, userList) {
-	for (var i = 0; i < userList.length; i++) {
-		if (userList[i].socketId == user.socketId) {
-			return i;
-		}
-	}
-	return null;
-}
 
 var handleDropPiece = function(socket, data, callback) {
 	// data:

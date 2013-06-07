@@ -12,6 +12,7 @@ function GameController($scope) {
 	var selectedPieceId = null;
 	var slotPieceKeyList = [];
 	var readyForGameStart = false;
+	var gameInSession = false;
 	
 	var initGame = function(data) {
 		$scope.pieces = data.puzzle.pieces;
@@ -26,7 +27,7 @@ function GameController($scope) {
 				$scope.slots.push({value:"", cssClass:"slot actionableItem", id:i});
 			}
 		}
-		
+		gameInSession = true;
 		$scope.$apply();
 	};
 	
@@ -104,13 +105,51 @@ function GameController($scope) {
 	var enablePieceInSlot = function(slotIdx) {
 		var slotNode = $("#slot-" + slotIdx);
 		slotNode.removeClass("untouchable");
+	};		
+	
+	var isUserMe = function(user) {
+		return (user.socketId === socket.socket.sessionid);
+	};
+
+	var getUserIdx = function(user, userList) {
+		for (var i = 0; i < userList.length; i++) {
+			if (userList[i].socketId == user.socketId) {
+				return i;
+			}
+		}
+		return null;
 	};
 	
+	var removeUser = function(user) {
+		if (gameInSession) {
+			var idx = getUserIdx(user, $scope.players);
+			console.log('before user remove: ' + JSON.stringify($scope.players));
+			$scope.players.splice(idx, 1);
+			console.log('after user remove: ' + JSON.stringify($scope.players));
+			$scope.$apply();
+		}
+	};
+	
+	var addUser = function(user) {
+		if (gameInSession) {
+			console.log('before user add: ' + JSON.stringify($scope.players));
+			$scope.players.push(user);
+			console.log('after user add: ' + JSON.stringify($scope.players));
+			$scope.$apply();
+		}
+	};
+	
+	socket.on("playerQuit", function(data) {
+		removeUser(data.player);
+	});
+	
 	socket.on("playerJoined", function(data) {
-		if (data.player.socketId === socket.socket.sessionid) {
+		if (isUserMe(data.player)) {
 			$("#WaitingDiv").removeClass("hidden");
 			readyForGameStart = true;
-		}
+		} else {
+			addUser(data.player);
+		}		
 	});
 	
 	socket.on("gameStarted", function(data) {
