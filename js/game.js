@@ -179,6 +179,13 @@ function GameController($scope) {
 		initGame(data);
 		refreshGame(data);
 	});
+	
+	socket.on("highscoresUpdated", function(data) {
+		if (gameInSession) {
+			$scope.highscores = data.highscores;
+			$scope.$apply();
+		}
+	});
 
 	$scope.getPieceIdFromSlotId = function(id) {
 
