@@ -14,8 +14,6 @@ function GameController($scope) {
 	var readyForGameStart = false;
 	
 	var initGame = function(data) {
-		$("#WaitingDiv").addClass("hidden");
-		$("#GameDiv").removeClass("hidden");
 		$scope.pieces = data.puzzle.pieces;
 		$scope.players = data.players;
 		$scope.slots = [];
@@ -47,6 +45,8 @@ function GameController($scope) {
 				}
 			}
 		}
+		$("#WaitingDiv").addClass("hidden");
+		$("#GameDiv").removeClass("hidden");
 	};
 	
 	var showPieceInBucket = function(pieceId) {
@@ -108,6 +108,7 @@ function GameController($scope) {
 	
 	socket.on("playerJoined", function(data) {
 		if (data.player.socketId === socket.socket.sessionid) {
+			$("#WaitingDiv").removeClass("hidden");
 			readyForGameStart = true;
 		}
 	});
