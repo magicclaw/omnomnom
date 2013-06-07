@@ -1,0 +1,56 @@
+[
+	{
+		"id": 0,
+		"prompt": ["The", null, "brown", null, null, "over", "the", null],
+		"pieces": [
+			{
+				"id": 0,
+				"value": "fox"
+			},
+			{
+				"id": 1,
+				"value": "quick"
+			},
+			{
+				"id": 2,
+				"value": "fence"
+			}
+			{
+				"id": 3,
+				"value": "jumped"
+			},
+		],
+		"solution": ["The", "quick", "brown", "fox", "jumped", "over", "the", "fence"]
+	},
+	{
+		"id": 0,
+		"prompt": ["I", "have", "not", "had", "a", "coke", "in", "a", "very", "long", "time"],
+		"pieces": [
+			{
+				"id": 0,
+				"value": "quick"
+			},
+			{
+				"id": 1,
+				"value": "fox"
+			},
+			{
+				"id": 2,
+				"value": "jumped"
+			},
+			{
+				"id": 3,
+				"value": "fence"
+			},
+			{
+				"id": 4,
+				"value": "fence"
+			},
+			{
+				"id": 5,
+				"value": "fence"
+			}
+		],
+		"solution": ["I", "have", "not", "had", "a", "coke", "in", "a", "very", "long", "time"]
+	}
+]

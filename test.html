@@ -1,0 +1,37 @@
+<html>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var socket = io.connect(window.location.origin);
+	socket.on('status', function(data) {
+		console.log('status: ' + JSON.stringify(data));
+	});
+	socket.on('gameCreated', function(data) {
+		console.log('gameCreated: ' + JSON.stringify(data));
+	});
+	socket.on('playerJoined', function(data) {
+		console.log('playerJoined: ' + JSON.stringify(data));
+	});
+	socket.on('gameStarted', function(data) {
+		console.log('gameStarted: ' + JSON.stringify(data));
+	});
+	socket.on('pieceGrabbed', function(data) {
+		console.log('pieceGrabbed: ' + JSON.stringify(data));
+	});
+	socket.on('piecePlaced', function(data) {
+		console.log('piecePlaced: ' + JSON.stringify(data));
+	});
+	socket.on('pieceDropped', function(data) {
+		console.log('pieceDropped: ' + JSON.stringify(data));
+	});
+	
+	socket.emit('joinGame', {'name':'Bob Scott'});
+</script>
+
+<body>
+
+
+
+</body>
+
+</html>
