@@ -27,6 +27,49 @@ var readPuzzles = function() {
 };
 var puzzles = readPuzzles();
 
+var readHighscores = function() {
+	try {
+		var data = fs.readFileSync(__dirname + '/highscores.json');
+		var parsedData = JSON.parse(data);
+		console.log('High Scores loaded. ' + jsonify(parsedData));
+		return parsedData;
+	} catch (err) {
+		console.log('Couldn\'t read high scores from highscores.json. Error: ' + jsonify(err));
+		return;
+	}
+};
+var highscores = readHighscores();
+
+var saveHighscores = function() {
+	try {
+		fs.writeFileSync(__dirname + '/highscores.json', highscores);
+	} catch (err) {
+		console.log('Couldn\'t save high scores to highscores.json. Error: ' + jsonify(err));
+		return;
+	}
+};
+
+var updateHighscore = function(user, pointAdder) {
+	var highscore = _.find(highscores, function(hs) {
+		return (hs.user.name == user.name);
+	});
+	if (!!highscore) {
+		highscore.points += pointAdder;
+	} else {
+		highscore = {
+			user: user,
+			points: pointAdder
+		};
+		highscores.push(highscore);
+	};
+	highscores.sort(function(a, b) {
+		return b.points - a.points;
+	});
+	saveHighscores();
+	console.log('emit-all: highscoresUpdated | ' + jsonify({highscores: highscores}));
+	io.sockets.emit('highscoresUpdated', {highscores: highscores});
+};
+
 app.listen(8085);
 
 function handler (req, res) {
@@ -78,7 +121,8 @@ var createGame = function() {
 	var game = {
 		players: [],
 		puzzle: puzzles[getRandy(0, 2)],
-		started: false
+		started: false,
+		highscores: highscores;
 	};
 	games.push(game);
 	

@@ -9,6 +9,7 @@ function GameController($scope) {
 	$scope.pieces = [];
 	$scope.slots = [];
 	$scope.players = [];
+	$scope.highscores = [];
 	var selectedPieceId = null;
 	var slotPieceKeyList = [];
 	var readyForGameStart = false;
@@ -18,6 +19,7 @@ function GameController($scope) {
 		$scope.pieces = data.puzzle.pieces;
 		$scope.players = data.players;
 		$scope.slots = [];
+		$scope.highscores = data.highscores;
 		for(var i = 0; i < data.puzzle.prompt.length;i++) {
 			var prompt = data.puzzle.prompt[i];
 
