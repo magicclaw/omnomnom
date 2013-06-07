@@ -139,8 +139,14 @@ function GameController($scope) {
 		}
 	};
 	
+	var refreshPlayers = function(players) {
+		$scope.players = players;
+		$scope.$apply();
+	};
+	
 	socket.on("playerQuit", function(data) {
-		removeUser(data.player);
+		//removeUser(data.player);
+		refreshPlayers(data.players);
 	});
 	
 	socket.on("playerJoined", function(data) {
@@ -148,7 +154,8 @@ function GameController($scope) {
 			$("#WaitingDiv").removeClass("hidden");
 			readyForGameStart = true;
 		} else {
-			addUser(data.player);
+			//addUser(data.player);
+			refreshPlayers(data.players);
 		}		
 	});
 	

@@ -31,16 +31,18 @@ body {
 .slot {
 	height: 25px;
 	width: 100px;
-	display:block;
-	float:left;
+	display:inline-block;
+	/*float:left;*/
 	margin-left:12px;
 	border: 1px solid black;
-
+	position: relative;
+	bottom: -0.5em;
 }
+
 .notSlot {
-	height: 25px;
+	/*height: 25px;
 	width: 100px;
-	float:left;
+	float:left;*/
 }
 
 .puzzleBox {

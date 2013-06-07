@@ -247,7 +247,7 @@ var handleJoinGame = function(socket, data, callback) {
 	
 		//Notify users of new player
 		console.log('emit-all: playerJoined');
-		io.sockets.emit('playerJoined', {player: user});
+		io.sockets.emit('playerJoined', {player: user, players: game.players});
 		
 		//Start game if minUsers threshold met
 		if (game.started) {
@@ -454,7 +454,7 @@ var handleLeaveGame = function(socket, data, callback) {
 	
 	//Notify users of exited player
 	console.log('emit-all: playerQuit');
-	io.sockets.emit('playerQuit', {player: user});
+	io.sockets.emit('playerQuit', {player: user, players: game.players});
 	
 	//End game if no players remain
 	console.log('Players remaining in game: ' + jsonify(game.players));
