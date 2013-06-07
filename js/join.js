@@ -7,8 +7,7 @@ function JoinController($scope) {
 		if($scope.yourName) {
 			socket.emit("joinGame", {name:$scope.yourName}, function(success){
 				$("#JoinDiv").addClass("hidden");
-				$("#GameDiv").removeClass("hidden");
-
+				$("#WaitingDiv").removeClass("hidden");
 			});	
 		}
 	};

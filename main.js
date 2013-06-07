@@ -10,6 +10,10 @@ var jsonify = function(obj) {
 	return JSON.stringify(obj, null, 4);
 };
 
+var getRandy = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 var readPuzzles = function() {
 	try {	
 		var data = fs.readFileSync(__dirname + '/puzzles.json');
@@ -73,7 +77,7 @@ var getOrCreateUser = function(name, socket) {
 var createGame = function() {
 	var game = {
 		players: [],
-		puzzle: puzzles[0],
+		puzzle: puzzles[getRandy(0, 2)],
 		started: false
 	};
 	games.push(game);
@@ -389,6 +393,15 @@ var handlePlacePiece = function(socket, data, callback) {
 	}
 };
 
+var getUserIdx = function(user, userList) {
+	for (var i = 0; i < userList.length; i++) {
+		if (userList[i].socketId == user.socketId) {
+			return i;
+		}
+	}
+	return null;
+}
+
 var handleDropPiece = function(socket, data, callback) {
 	// data:
 	// {
@@ -403,7 +416,7 @@ var handleDropPiece = function(socket, data, callback) {
 		return;
 	}
 	
-	dropPiece(user, game); //drop any piece we might be holding
+	dropPiece(user, game);
 	
 	if (!!callback) {
 		callback(true);
@@ -424,7 +437,32 @@ var handleLeaveGame = function(socket, data, callback) {
 		return;
 	}
 	
+	//drop any piece the user might be holding before they exit
 	dropPiece(user, game);
+	
+	//remove user from players list
+	var playerIdx = getUserIdx(user, game.players);
+	if (!_.isNull(playerIdx)) {
+		game.players.splice(userIdx, 1);
+	}
+	
+	//remove user from users list
+	var userIdx = getUserIdx(user, users);
+	if (!_.isNull(userIdx)) {
+		users.splice(userIdx, 1);
+	}
+	
+	//Notify users of exited player
+	console.log('emit-all: playerQuit');
+	io.sockets.emit('playerQuit', {player: user});
+	
+	//End game if no players remain
+	console.log('Players remaining in game: ' + jsonify(game.players));
+	if (game.players.length == 0) {
+		console.log('emit-all: gameEnded');
+		io.sockets.emit('gameEnded', sanitizeGame(game));
+		games = []; //not so good if we ever support more than one game! but we won't during THIS hackathon!!!
+	}
 	
 	if (!!callback) {
 		callback(true);
@@ -464,6 +502,10 @@ io.sockets.on('connection', function (socket) {
 	//User exits the game
 	socket.on('leaveGame', function(data, callback) {
 		handleLeaveGame(socket, data, callback);
+	});
+	
+	socket.on('disconnect', function() {
+		handleLeaveGame(socket);
 	});
 	
 });
