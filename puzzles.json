@@ -103,5 +103,71 @@
 			}
 		],
 		"solution": ["Two", "roads", "diverged", "in", "a", "yellow", "wood", "and", "sorry", "I", "could", "not", "travel", "both", "and", "be", "one", "traveler", "long", "I", "stood", "and", "looked", "down", "one", "as", "far", "as", "I", "could", "to", "where", "it", "bent", "in", "the", "undergrowth"]
+	},
+	{
+		"id": 3,
+		"prompt": ["Hey", null, "diddle", "the", null, "and", "the", null, "the", "cow", null, "over", null, "moon", "the", null, "dog", null, "to", "see", "such", "a", null, "and", "the", null, "ran", null, "with", "the", null],
+		"pieces": [
+			{
+				"id": 21,
+				"value": "laughed"
+			},
+			{
+				"id": 22,
+				"value": "jumped"
+			},
+			{
+				"id": 23,
+				"value": "spoon"
+			},
+			{
+				"id": 24,
+				"value": "cat"
+			},
+			{
+				"id": 25,
+				"value": "dish"
+			},
+			{
+				"id": 26,
+				"value": "diddle"
+			},
+			{
+				"id": 27,
+				"value": "little"
+			},
+			{
+				"id": 28,
+				"value": "sport"
+			},
+			{
+				"id": 29,
+				"value": "the"
+			},
+			{
+				"id": 30,
+				"value": "fiddle"
+			},
+			{
+				"id": 31,
+				"value": "away"
+			}
+		],
+		"solution": ["Hey", "diddle", "diddle", "the", "cat", "and", "the", "fiddle", "the", "cow", "jumped", "over", "the", "moon", "the", "little", "dog", "laughed", "to", "see", "such", "a", "sport", "and", "the", "dish", "ran", "away", "with", "the", "spoon"]
+	},
+	{
+		"id": 4,
+		"prompt": ["Thank", "you", "for", "voting", null, "team", null],
+		"pieces": [
+			{
+				"id": 32,
+				"value": "OMNOMNOM"
+			},
+			{
+				"id": 33,
+				"value": "for"
+			}
+		],
+		"solution": ["Thank", "you", "for", "voting", "for", "team", "omnomnom!"]
 	}
 ]

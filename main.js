@@ -130,7 +130,7 @@ var getOrCreateUser = function(name, socket) {
 var createGame = function() {
 	var game = {
 		players: [],
-		puzzle: puzzles[getRandy(0, 2)],
+		puzzle: puzzles[getRandy(0, 4)],
 		started: false,
 		highscores: highscores
 	};
