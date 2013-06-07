@@ -14,6 +14,8 @@ function GameController($scope) {
 	var readyForGameStart = false;
 	
 	var initGame = function(data) {
+		$("#WaitingDiv").addClass("hidden");
+		$("#GameDiv").removeClass("hidden");
 		$scope.pieces = data.puzzle.pieces;
 		$scope.players = data.players;
 		$scope.slots = [];
