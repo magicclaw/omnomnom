@@ -128,6 +128,13 @@ function GameController($scope) {
 		initGame(data);
 		refreshGame(data);
 	});
+
+	$scope.unselectDraggedPiece = function(id) {
+		var pieceNode = $("#piece-" + id);
+		socket.emit("dropPiece", {pieceId:id});
+		pieceNode.removeClass("selectedPiece");
+		selectedPieceId = null;
+	};
 	
 	$scope.pieceClick = function(id) {
 		var pieceNode = $("#piece-" + id);

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	<link rel="stylesheet" href="styles/custom.css" />
@@ -30,7 +31,7 @@
 		<div align="center" >
 			<div class="bucket actionableItem" ng-Dblclick="bucketDoubleClick()">
 				<h4>Bucket List</h4>
-				<div ng-repeat="piece in pieces" id="piece-{{piece.id}}" ng-click="pieceClick(piece.id)" class="actionableItem pieceClass">{{piece.value}}</div>
+				<div ng-repeat="piece in pieces" id="piece-{{piece.id}}" ng-click="pieceClick(piece.id)" class="actionableItem pieceClass" draggable="true" ondragstart="onPieceDragStart({{piece.id}})" ondragend="onPieceDrop({{piece.id}})">{{piece.value}}</div>
 			</div>
 
 			<br/>

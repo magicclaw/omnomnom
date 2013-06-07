@@ -3,6 +3,17 @@
 
 
 var Game = angular.module('Game', []);
+
+//Draggable events
+function onPieceDragStart(id) {
+	socket.emit("grabPiece", {pieceId:id}, function(allowable) {});
+}
+
+function onPieceDrop(id) {
+	var scope = angular.element($("#GameDiv")).scope();
+	scope.unselectDraggedPiece(id);
+}
+
 // Game.directive('draggable', function() {
 //     return {
 //         // A = attribute, E = Element, C = Class and M = HTML Comment
