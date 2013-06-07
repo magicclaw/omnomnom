@@ -14,43 +14,94 @@
 			{
 				"id": 2,
 				"value": "fence"
-			}
+			},
 			{
 				"id": 3,
 				"value": "jumped"
-			},
+			}
 		],
 		"solution": ["The", "quick", "brown", "fox", "jumped", "over", "the", "fence"]
 	},
 	{
-		"id": 0,
-		"prompt": ["I", "have", "not", "had", "a", "coke", "in", "a", "very", "long", "time"],
+		"id": 1,
+		"prompt": [null, "have", null, "had", "a", null, "in", "a", null, null, null],
 		"pieces": [
 			{
-				"id": 0,
-				"value": "quick"
-			},
-			{
-				"id": 1,
-				"value": "fox"
-			},
-			{
-				"id": 2,
-				"value": "jumped"
-			},
-			{
-				"id": 3,
-				"value": "fence"
-			},
-			{
 				"id": 4,
-				"value": "fence"
+				"value": "very"
 			},
 			{
 				"id": 5,
-				"value": "fence"
+				"value": "coke"
+			},
+			{
+				"id": 6,
+				"value": "time"
+			},
+			{
+				"id": 7,
+				"value": "I"
+			},
+			{
+				"id": 8,
+				"value": "long"
+			},
+			{
+				"id": 9,
+				"value": "not"
 			}
 		],
 		"solution": ["I", "have", "not", "had", "a", "coke", "in", "a", "very", "long", "time"]
+	},
+	{
+		"id": 2,
+		"prompt": ["Two", null, null, "in", "a", null, "wood", "And", "sorry", "I", "could", null, null, "both", "and", "be", "one", null, "long", "I", "stood", "and", null, "down", "one", "as", null, "as", "I", "could", "to", null, "it", "bent", "in", null, null],
+		"pieces": [
+			{
+				"id": 10,
+				"value": "traveler"
+			},
+			{
+				"id": 11,
+				"value": "roads"
+			},
+			{
+				"id": 12,
+				"value": "not"
+			},
+			{
+				"id": 13,
+				"value": "where"
+			},
+			{
+				"id": 14,
+				"value": "undergrowth"
+			},
+			{
+				"id": 15,
+				"value": "travel"
+			},
+			{
+				"id": 16,
+				"value": "far"
+			},
+			{
+				"id": 17,
+				"value": "diverged"
+			},
+			{
+				"id": 18,
+				"value": "looked"
+			},
+			{
+				"id": 19,
+				"value": "the"
+			},
+			{
+				"id": 20,
+				"value": "yellow"
+			}
+		],
+		"solution": ["Two", "roads", "diverged", "in", "a", "yellow", "wood,", "And", "sorry", "I", "could", "not", "travel", "both", "And", "be", "one", "traveler,", "long", "I", "stood", "And", "looked", "down", "one", "as", "far", "as", "I", "could", "To", "where", "it", "bent", "in", "the", "undergrowth"]
 	}
 ]

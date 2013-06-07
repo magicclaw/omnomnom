@@ -4,11 +4,15 @@ var app = require('http').createServer(handler),
 	_ = require('underscore'),
 	games = [],
 	users = [],
-	minUsersPerGame = 2;
+	minUsersPerGame = 1;
 
 var jsonify = function(obj) {
 	return JSON.stringify(obj, null, 4);
 };
+
+var getRandy = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 var readPuzzles = function() {
 	try {	
@@ -73,7 +77,7 @@ var getOrCreateUser = function(name, socket) {
 var createGame = function() {
 	var game = {
 		players: [],
-		puzzle: puzzles[0],
+		puzzle: puzzles[getRandy(0, 2)],
 		started: false
 	};
 	games.push(game);
