@@ -1,9 +1,31 @@
 @charset 'UTF-8';
 
+body {
+	background: #EEE;
+}
+
+.hidden {
+	display:none;
+}
+
+.main {
+	margin-top: 14px;
+}
+
+.content {
+	background: white;
+	border-radius: 6px;
+	padding: 14px;
+	border: 1px solid #DDD;
+}
+
+#JoinDiv {
+	margin-top: 200px;
+}
+
 .bucket {
-	height: 200px;
-	width: 300px;
-	border: 1px solid black;
+	padding: 10px;
+	margin-bottom: 18px;
 }
 
 .slot {
@@ -22,9 +44,6 @@
 }
 
 .puzzleBox {
-	height: 300px;
-	width: 800px;
-	border: 1px solid black;
 }
 
 .pieceClass {
@@ -33,9 +52,7 @@
 	display:block;
 }
 
-.hidden {
-	display:none;
-}
+
 .selectedPiece {
 	color:red;
 }
@@ -45,9 +62,7 @@
 }
 
 .UserList {
-	height: 300px;
-	width:100px;
-	border: 1px solid black;
+	
 }
 
 .untouchable {

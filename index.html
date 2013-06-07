@@ -1,7 +1,10 @@
+<!DOCTYPE html>
 <html>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-	<link rel="stylesheet" href="css/bootstrap.css" />
-	<link rel="stylesheet" href="css/custom.css" />
+	<link rel="stylesheet" href="/css/bootstrap.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/css/bootstrap-responsive.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/custom.css" />
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="http://code.angularjs.org/1.0.6/angular.min.js"></script>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -20,32 +23,51 @@
 	</script>
 
 <body ng-app="Game">
-	<div class="container">
-		<div id="JoinDiv" ng-controller="JoinController" class="row">
-			<div class="span4 offset4">
-				<label>Name:</label>
-				<input type="text" ng-model="yourName" placeholder="Enter a name here">
-				<button ng-click = "validateAndJoin()">Join</button>
+	<div class="navbar navbar-static-top navbar-inverse">
+		<div class="navbar-inner">
+			<span class="brand">OM NOM NOM</span>
+		</div>
+	</div>
+	<div class="container-fluid main">
+		<div id="JoinDiv" ng-controller="JoinController" class="row-fluid">
+			<div class="span4 offset4 content">
+				<form>
+					<fieldset>
+						<legend>OM NOM NOM GO!</legend>
+	    				<div class="input-append">
+	    					<input type="text" ng-model="yourName" placeholder="Enter your name" class="span12">
+	    					<button ng-click="validateAndJoin()" class="btn btn-primary" type="button">Join Game</button>
+	    				</div>
+					</fieldset>
+				</form>
 			</div>
 		</div>
 
-		<div id="GameDiv" class="hidden" ng-controller="GameController" class="row">
-			<div class="span3"></div>
-			<div class="span6 container">
-				<div class="row">
-					<div class="bucket actionableItem span12" ng-Dblclick="bucketDoubleClick()">
+		<div id="GameDiv" class="hidden" ng-controller="GameController" class="row-fluid">
+			<div class="span3 content">
+				<h3>Stuff</h3>
+			</div>
+			<div class="span6 container-fluid">
+				<div class="row-fluid">
+					<div class="bucket actionableItem span12 content" ng-Dblclick="bucketDoubleClick()">
 						<h4>Bucket List</h4>
 						<div ng-repeat="piece in pieces" id="piece-{{piece.id}}" ng-click="pieceClick(piece.id)" class="actionableItem pieceClass">{{piece.value}}</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="puzzleBox span12">
+				<div class="row-fluid">
+					<div class="puzzleBox span12 content">
 						<h4>Puzzle</h4>
 						<span ng-repeat="slot in slots" class="{{slot.cssClass}}" id="slot-{{slot.id}}" ng-Dblclick="slotDoubleClick(slot.id)" ng-click="slotClick(slot.id)">{{slot.value}}</span>
 					</div>
 				</div>
 			</div>
-			<div class="span3"></div>
+			<div class="span3 content">
+				<h3>Other Stuff</h3>
+			</div>
+		</div>
+
+		<div id="WaitingDiv" class="hidden" ng-controller="GameController">
+			Waiting for enough players to join. When enough players have joined, the game will begin automatically.
 		</div>
 
 		<div id="FinishedDiv" class="hidden" ng-controller="FinishedController">
