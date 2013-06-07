@@ -52,7 +52,7 @@
 			</div>
 			<div class="span6 container-fluid">
 				<div class="row-fluid">
-					<div class="bucket actionableItem span12 content" ng-Dblclick="bucketDoubleClick()" ondragover="allowDroppable(-1, -1)" ondrop="onPieceDropped(event, -1)">
+					<div class="bucket actionableItem span12 content" ng-click="bucketClick()" ondragover="allowDroppable(-1, -1)" ondrop="onPieceDropped(event, -1)">
 						<h4>Bucket List</h4>
 						<ul class="words">
 							<li ng-repeat="piece in pieces" id="piece-{{piece.id}}" ng-click="pieceClick(piece.id)" class="actionableItem pieceClass" draggable="true" ondragstart="onPieceDragStart({{piece.id}})" ondragend="onPieceDrop({{piece.id}})">{{piece.value}}</li>
@@ -63,7 +63,7 @@
 					<div class="puzzleBox span12 content">
 						<h4>Puzzle</h4>
 						<p>
-						<span ng-repeat="slot in slots" class="{{slot.cssClass}}" id="slot-{{slot.id}}" ng-Dblclick="slotDoubleClick(slot.id)" ng-click="slotClick(slot.id)" draggable="true" ondragstart="onSlotDragStart({{slot.id}})" ondragend="onSlotDrop({{slot.id}})" ondragover="allowDroppable({{slot.id}}, 'slot-{{slot.id}}')" ondrop="onPieceDropped(event, {{slot.id}})">&nbsp;{{slot.value}}</span>.
+						<span ng-repeat="slot in slots" class="{{slot.cssClass}}" id="slot-{{slot.id}}" ng-click="slotClick(slot.id)" draggable="true" ondragstart="onSlotDragStart({{slot.id}})" ondragend="onSlotDrop({{slot.id}})" ondragover="allowDroppable({{slot.id}}, 'slot-{{slot.id}}')" ondrop="onPieceDropped(event, {{slot.id}})">&nbsp;{{slot.value}}</span>.
 						</p>
 					</div>
 				</div>
