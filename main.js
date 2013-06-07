@@ -161,6 +161,7 @@ var sanitizeGame = function(game) {
 	sanGame.players = _.clone(game.players);
 	sanGame.puzzle = _.clone(game.puzzle);
 	delete sanGame.puzzle.solution;
+	sanGame.highscores = highscores; //hack!!!
 	return sanGame;
 };
 
