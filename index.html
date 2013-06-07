@@ -27,7 +27,7 @@
 		</div>
 	</div>
 	<div class="container-fluid main">
-		<div id="JoinDiv" ng-controller="JoinController" class="row-fluid">
+		<div id="JoinDiv" ng-controller="JoinController" class="row-fluid down200">
 			<div class="span4 offset4 content" ng-submit="validateAndJoin()">
 				<form>
 					<fieldset>
@@ -78,8 +78,13 @@
 			</div>
 		</div>
 
-		<div id="WaitingDiv" class="hidden" ng-controller="GameController">
-			Waiting for enough players to join. When enough players have joined, the game will begin automatically.
+		<div id="WaitingDiv" class="hidden row-fluid down200" ng-controller="GameController">
+			<div class="span4 offset4 content">
+				<div class="header">
+					<h4>Waiting For Players</h4>
+				</div>
+				<p>When enough players have joined, the game will begin automatically.</p>
+			</div>
 		</div>
 
 		<div id="FinishedDiv" class="hidden" ng-controller="FinishedController">
