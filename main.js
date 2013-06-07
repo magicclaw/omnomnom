@@ -78,7 +78,12 @@ var updateHighscore = function(user, pointAdder) {
 app.listen(8085);
 
 function handler (req, res) {
-	fs.readFile(__dirname + req.url, function (err, data) {
+	var file = req.url;
+
+	if (file === '/')
+		file = '/index.html';
+
+	fs.readFile(__dirname + file, function (err, data) {
 		if (err) {
 			res.writeHead(500);
 			return res.end('Error loading file ' + req.url);
