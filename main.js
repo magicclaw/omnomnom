@@ -122,7 +122,7 @@ var createGame = function() {
 		players: [],
 		puzzle: puzzles[getRandy(0, 2)],
 		started: false,
-		highscores: highscores;
+		highscores: highscores
 	};
 	games.push(game);
 	
