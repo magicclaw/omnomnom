@@ -171,6 +171,10 @@ function GameController($scope) {
 		refreshGame(data);
 	});
 
+	$scope.getSelectedPiece = function() {
+		return selectedPieceId;
+	}
+
 	$scope.unselectDraggedPiece = function(id) {
 		var pieceNode = $("#piece-" + id);
 		socket.emit("dropPiece", {pieceId:id});
