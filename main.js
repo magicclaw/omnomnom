@@ -145,6 +145,9 @@ var createGame = function() {
 		if (!!piece.heldBy) {
 			delete piece.heldBy;
 		}
+		if (!!piece.scored) {
+			delete piece.scored;
+		}
 	});
 	
 	//Notify users of a new game being created
@@ -222,6 +225,10 @@ var isPuzzleSolved = function(game) {
 	return success;
 };
 
+var isSlotValid = function(slotIdx, game) {
+	return slotIdx >= -1 && slotIdx <= game.puzzle.prompt.length - 1 && game.puzzle.prompt[slotIdx] == null;
+};
+
 var isPieceCorrect = function(piece, game) {
 	return (piece.placedAt >= 0 && game.puzzle.solution[piece.placedAt] == piece.value);
 };
@@ -238,7 +245,14 @@ var placePieceAt = function(piece, slotPiece, slotIdx, game, user) {
 		console.log('emit-all: piecePlaced | ' + jsonify({piece: slotPiece}));
 		io.sockets.emit('piecePlaced', {piece: slotPiece});
 		if (isPieceCorrect(slotPiece, game)) {
-			updateHighscore(user, 1);
+			if (!slotPiece.scored) {
+				updateHighscore(user, 1);
+				slotPiece.scored = true;
+			}
+		} else {
+			if (slotPiece.placedAt >= 0) {
+				updateHighscore(user, -5);
+			}
 		}
 	} else {
 		if (previousSlotIdx != -1) {
@@ -247,7 +261,14 @@ var placePieceAt = function(piece, slotPiece, slotIdx, game, user) {
 		}
 	}
 	if (isPieceCorrect(piece, game)) {
-		updateHighscore(user, 1);
+		if (!piece.scored) {
+			updateHighscore(user, 1);
+			piece.scored = true;
+		}
+	} else {
+		if (piece.placedAt >= 0) {
+			updateHighscore(user, -5);
+		}
 	};
 	console.log('emit-all: piecePlaced | ' + jsonify({piece: piece}));
 	io.sockets.emit('piecePlaced', {piece: piece});
@@ -449,11 +470,11 @@ var handlePlacePiece = function(socket, data, callback) {
 		return;
 	}
 	
-	if (data.slotIdx < -1 || data.slotIdx > game.puzzle.slotCount - 1) {
+	if (!isSlotValid(data.slotIdx, game)) {
 		if (!!callback) {
 			callback(false);
 		}
-		console.log('handlePlacePiece() failed; specified slot index out of range');
+		console.log('handlePlacePiece() failed; specified slot index invalid');
 		return;
 	}
 	
